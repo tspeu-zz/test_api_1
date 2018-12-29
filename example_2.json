@@ -1,0 +1,42 @@
+{
+  "workers": [
+    {
+      "id": 1,
+      "availability": ["Monday", "Wednesday"],
+      "payrate": 7.50
+    },
+    {
+      "id": 2,
+      "availability": ["Monday", "Tuesday", "Thursday"],
+      "payrate": 9.00
+    },
+    {
+      "id": 3,
+      "availability": ["Monday", "Friday"],
+      "payrate": 18.00
+    },
+    {
+      "id": 4,
+      "availability": ["Monday", "Tuesday", "Friday"],
+      "payrate": 12.25
+    }
+  ],
+  "shifts": [
+    {
+      "id": 1,
+      "day": ["Monday"]
+    },
+    {
+      "id": 2,
+      "day": ["Tuesday"]
+    },
+    {
+      "id": 3,
+      "day": ["Wednesday"]
+    },
+    {
+      "id": 4,
+      "day": ["Thursday"]
+    }
+  ]
+}

@@ -47,22 +47,23 @@ app.post('/api/matching',(req, res) => {
 
         //TODO WORKERS
         const workerList = req.body.workers;
-        console.log('---->'+ workerList +'-------------');
-        console.log('---->'+ workerList.length +'-------------');
-        console.log('---->'+ _.isArray(workerList) +'-------------');
-        console.log('---->'+ _.isEmpty(workerList) +'-------------');
+        //console.log('---->'+ workerList +'-------------');
+        // console.log('---->'+ workerList.length +'-------------');
+        // console.log('---->'+ _.isArray(workerList) +'-------------');
+        // console.log('---->'+ _.isEmpty(workerList) +'-------------');
         
         //TODO SHIFT
         const shiftsList = req.body.shifts;
-        console.log('---->'+ shiftsList +'-------------');
-        console.log('---->'+ shiftsList.length +'-------------');
-        console.log('---->'+ _.isArray(shiftsList) +'-------------');
-        console.log('---->'+ _.isEmpty(shiftsList) +'-------------');
+        //console.log('---->'+ shiftsList +'-------------');
+        // console.log('---->'+ shiftsList.length +'-------------');
+        // console.log('---->'+ _.isArray(shiftsList) +'-------------');
+        // console.log('---->'+ _.isEmpty(shiftsList) +'-------------');
 
 
-        //TODO CHECK
-        let worDays = _.map(workerList,'availability' );
-        console.log(worDays);
+        //TODO MATCHLIST
+        let matchList = [];
+
+        
 
         /**TODO*/
         //       * check for shifts 
@@ -82,10 +83,60 @@ app.post('/api/matching',(req, res) => {
                     case 1:
                         console.log('mismos SHIFTS y WORKERS');
                         msmOut = 'mismos SHIFTS y WORKERS';
+                        //TODO workinDays
+                        let workerListMap = _.map(workerList );
+                        let worDays = _.map(workerList,'availability' );
+                        console.log( worDays);
+                        //console.log(workerListMap);
+
                         for(let s of shiftsList) {
-    
-    
-                            console.log(s.day);
+                            let shifToday = s.day;
+                            console.log('*************SHIFT DEL DIA: '+ shifToday+'**************');
+
+//TODO PREPARAR EL ARRAY Y QUITAR LOS REPETIDDOS-> DEJANDO SOLO LA PRIMERA COICIDENCIA
+                            for (let i=0; i < workerListMap.length; i++ ) {
+
+                                for (let wd=0; wd < workerListMap[i].availability.length; wd++) {
+
+                                    if (shifToday == workerListMap[i].availability[wd]) {
+                                        console.log('id '+ workerListMap[i].id+' aki-> '+workerListMap[i].availability[wd]);
+                                    }
+                                }
+                            }
+
+
+/*
+                            
+                            for (let j=0; j < workerListMap.length ; j++) {
+                                
+                            // console.log('worker Working id'+ workerListMap[j].id);
+                                let worker = workerListMap[j];
+                                let wDays =  workerListMap[j].availability;
+                                // console.log('----worker : ' + JSON.stringify(worker) );                 
+                                //console.log('----wDays : ' + wDays );                 
+                                console.log('worker ID: '+workerListMap[j].id +' availability:' + wDays);                 
+                                
+
+                            /*
+                                for (let wd=0; wd < wDays.length; wd++) {
+                                    //console.log('working days: '+ wDays[wd]);
+                            
+                                    if (shifToday ==  wDays[wd]) {
+                                        console.log('%%%% MATCHING ID WORKER :' +workerListMap[j].id +'SHIFT: '+  wDays[wd]);
+                                        
+                                        workerListMap = _.without(workerListMap,shifToday );
+                                        console.log('sin '+shifToday + ' - '+workerListMap);
+                                        //_.filter(workerListMap.availability,shifToday );
+                                        //_.remove(workerListMap,shifToday );
+                                    }
+                            
+                                }
+                            */    
+
+                            console.log('---------------------------------END WORK');
+                                
+                            //}
+
             
                         }
 

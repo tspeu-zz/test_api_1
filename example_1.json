@@ -1,0 +1,33 @@
+{
+  "workers": [
+    {
+      "id": 1,
+      "availability": ["Tuesday"],
+      "payrate": 7.50
+    },
+    {
+      "id": 2,
+      "availability": ["Monday"],
+      "payrate": 9.00
+    },
+    {
+      "id": 3,
+      "availability": ["Friday"],
+      "payrate": 8.00
+    }
+  ],
+  "shifts": [
+    {
+      "id": 1,
+      "day": ["Monday"]
+    },
+    {
+      "id": 2,
+      "day": ["Tuesday"]
+    },
+    {
+      "id": 3,
+      "day": ["Friday"]
+    }
+  ]
+}
