@@ -1,15 +1,26 @@
-var express = require('express');
-var fs = require('fs');
-var JSONStream = require('JSONStream');
+// docker build -t test/test1:1.0 .
+// docker run -p 8080:8080 test/test1:1.0
+const express = require('express');
+const fs = require('fs');
+const JSONStream = require('JSONStream');
 const bodyParser = require('body-parser');
 const _ = require('lodash');
 const ctrlMain = require('./mainController.js');
 
-var app = express();
+const app = express();
 
 //use middleware
 app.use(bodyParser.urlencoded( {extended:true}));
 app.use(bodyParser.json());
+
+var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', "*");
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+}
+
+app.use(allowCrossDomain);
 
 
 app.get('/', (req, res) => {
@@ -175,9 +186,10 @@ app.post('/api/matching',(req, res) => {
         }
 
 
-        res.send(msmOut)
+        res.send({'res': msmOut})
 
-    } catch (e){
+    } 
+    catch (e) {
         res.status(400).send(e);
     }
 });
@@ -212,6 +224,6 @@ function checkLength(listShifts, listWorkers ) {
 }
 /************************************************************************************************** */
 
-var server = app.listen(3000, function() {
+var server = app.listen(3003, function() {
     console.log('server running at port :' + server.address().port);
 });
